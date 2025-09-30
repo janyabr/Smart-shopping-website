@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Shopping Assistant - India</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛍️ Smart Shopping Assistant</h1>
+            <p>Optimize your shopping with intelligent budget allocation</p>
+        </header>
+
+        <div class="budget-section">
+            <div class="budget-input">
+                <label for="budget">Your Budget (₹):</label>
+                <input type="number" id="budget" placeholder="Enter your budget in INR" min="0" step="1">
+                <button onclick="optimizeShopping()">Optimize Shopping List</button>
+            </div>
+            <div class="budget-display">
+                <div class="budget-info">
+                    <div class="budget-card total">
+                        <div class="budget-label">Total Budget</div>
+                        <div class="budget-amount">₹<span id="totalBudget">0</span></div>
+                        <div class="budget-percentage">100% Available</div>
+                    </div>
+                    <div class="budget-card used">
+                        <div class="budget-label">Amount Used</div>
+                        <div class="budget-amount">₹<span id="usedBudget">0</span></div>
+                        <div class="budget-percentage"><span id="usedPercentage">0</span>% Spent</div>
+                    </div>
+                    <div class="budget-card remaining">
+                        <div class="budget-label">Remaining</div>
+                        <div class="budget-amount">₹<span id="remainingBudget">0</span></div>
+                        <div class="budget-percentage"><span id="remainingPercentage">100</span>% Left</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="products-section">
+                <h2>Available Products</h2>
+                
+                <!-- Add Custom Item Section -->
+                <div class="add-item-section">
+                    <h3>Add Custom Item</h3>
+                    <div class="add-item-form">
+                        <span class="product-preference">Score: ${product.preference}</span>
+                        <input type="text" id="itemName" placeholder="Item name" required>
+                        <input type="number" id="itemPrice" placeholder="Price (₹)" min="1" required>
+                        <input type="number" id="itemPreference" placeholder="Preference (1-100)" min="1" max="100" required>
+                        <select id="itemCategory">
+                            <option value="custom">Custom</option>
+                            <option value="grains">Grains</option>
+                            <option value="vegetables">Vegetables</option>
+                            <option value="fruits">Fruits</option>
+                            <option value="dairy">Dairy</option>
+                            <option value="spices">Spices</option>
+                            <option value="snacks">Snacks</option>
+                        </select>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="itemPerishable"> Perishable
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="itemDivisible"> Divisible
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="itemEssential"> Essential
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="itemOnSale"> On Sale
+                        </label>
+                        <input type="number" id="itemSalePrice" placeholder="Sale price (₹)" min="1" style="display: none;">
+                        <button onclick="addCustomItem()" class="add-item-btn">Add Item</button>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <button onclick="filterProducts('all')" class="filter-btn active">All Items</button>
+                    <button onclick="filterProducts('perishable')" class="filter-btn">Perishables</button>
+                    <button onclick="filterProducts('divisible')" class="filter-btn">Divisible Items</button>
+                    <button onclick="filterProducts('sale')" class="filter-btn">On Sale</button>
+                    <button onclick="filterProducts('essential')" class="filter-btn">Essential</button>
+                </div>
+                <div id="productsGrid" class="products-grid"></div>
+            </div>
+
+            <div class="results-section">
+                <h2>Optimized Shopping List</h2>
+                <div class="final-results">
+                    <h3>Recommended Items</h3>
+                    <div id="finalRecommendation"></div>
+                    <div class="stats">
+                        <p>Total Preference Score: <span id="totalScore">0</span></p>
+                        <p>Budget Efficiency: <span id="efficiency">0%</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="products.js"></script>
+    <script src="algorithms.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
